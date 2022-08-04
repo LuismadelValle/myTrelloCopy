@@ -1,17 +1,21 @@
 <template>
   <div>
-    <NavBar /> 
+    <NavBar />
     <div v-for="card in cards" :key="card.id" class="row">
       <h3>{{ card.title }}</h3>
-    </div> 
+    </div>
     <div class="row">
       <div class="col-2">
         <p>Here goes smth</p>
       </div>
       <div class="col">
-        <TaskCards />
+        <b-container fluid>
+          <b-row>
+            <TaskCards />
+          </b-row>
+        </b-container>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 
