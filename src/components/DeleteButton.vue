@@ -1,21 +1,39 @@
 <template>
   <div>
-    <b-button id="deleteBtn" variant="outline-danger" @click="deleteCard(index)">🗑️ Delete</b-button>
+    <b-button id="deleteBtn" variant="outline-danger" @click="deleteCard(); reloadPage();">🗑️ Delete</b-button>
   </div>
 </template>
 
 <script>
-import cardsDefault from '@/assets/card.json'
+import axios from 'axios'
 
 export default {
   data() {
     return {
-      cards: cardsDefault,
+      cards: null,
+      id: null,
+      loading: true,
+      errors: false
     }
   },
   methods: {
-    deleteCard(index) {
-      this.cards.splice(index, 1);
+    deleteCard() {
+      this.getEvents('http://localhost:8081/cards')
+    },
+    async getEvents(url) {
+      axios
+        .delete(url, {
+          cards: this.id
+        })
+        .then(response => response.status)
+        .catch(error => {
+          console.log(error)
+          this.errors = true
+        })
+        .finally(() => this.loading = false)
+    },
+    reloadPage() {
+      window.location.reload();
     }
   }
 }

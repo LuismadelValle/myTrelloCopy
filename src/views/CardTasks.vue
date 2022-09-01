@@ -21,8 +21,8 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
-import cardsDefault from '@/assets/card.json';
 import TaskCards from '@/components/TaskCards.vue';
+import axios from 'axios'
 
 export default{
   components: {
@@ -31,7 +31,7 @@ export default{
   },
   data(){
     return {
-      cards: cardsDefault
+      cards: null
     }
   }
 }
